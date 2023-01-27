@@ -32,3 +32,4 @@ int amount_of_elements(LIBRARY *START);
 bool is_available_catalog_nb(LIBRARY *START,int number);
 void insertion_sort(LIBRARY *START);
 void clearr(LIBRARY **START);
+void edit_element(LIBRARY **START);

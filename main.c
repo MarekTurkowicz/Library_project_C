@@ -8,10 +8,8 @@ int main(){
             ///DEFAULT ZMIANA
     LIBRARY *START = NULL;
     read_file(&START,"data_test.txt");
-    //view_year_increase(START);
-    //view_author_alfp(START);
-    //search_author(START);
             ///MENU
+
 int user_input;
     while(true){
             ///MAIN MENU
@@ -62,8 +60,8 @@ int user_input;
                 return 0;
             }
 
-
 }
+    write_file(START,"data_test.txt");
     clearr(&START);
     return 0;
 }

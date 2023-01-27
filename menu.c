@@ -206,6 +206,7 @@ void search_title(LIBRARY *START){///DONE
         strlwr(title);
         if(strcmpi(copy,title) == 0){// || strstr(copy,title)
             print_element(TMP);
+             x = true;
         }
         TMP=TMP->next;
     }
@@ -304,7 +305,7 @@ void search_menu(){ ///DONE
     printf("     Opcja ""2"": Szukaj po tytule.\n");
     printf("     Opcja ""3"": Szukaj po roku.\n");
     printf("     Opcja ""4"": Szukaj dostêpne.\n");
-    printf("     Opcja ""0"": Wyjdz z biblioteki. \n\n");
+    printf("     Opcja ""0"": Powrot do wczesniejszego menu. \n\n");
     printf("     Twoja wybrana opcja: ");
 }
 
@@ -314,7 +315,7 @@ void edit_menu(){ ///DONE
     printf("     Opcja ""1"": Dodaj element.\n");
     printf("     Opcja ""2"": Edytuj element.\n");
     printf("     Opcja ""3"": Usuñ element.\n");
-    printf("     Opcja ""0"": Dzialanie na elementach.\n\n");
+    printf("     Opcja ""0"": Powrot do wczesniejszego menu.\n\n");
     printf("     Twoja wybrana opcja: ");
 }
 
@@ -351,8 +352,10 @@ void view_menu_print(LIBRARY *START){ ///DONE
 
             ///AVAILABLE
             }
+
              else if(user_input2 == 4){
                     system("cls");
+                    //fflush(stdin);
                 view_available(START);
                 getch();
             }
@@ -381,6 +384,7 @@ void search_menu_print(LIBRARY *START){
             ///TITLE
             if(user_input3 == 1){
                     system("cls");
+                     fflush(stdin);
                 search_title(START);
                 getch();
             }
@@ -388,7 +392,7 @@ void search_menu_print(LIBRARY *START){
             else if(user_input3 == 2){
                     system("cls");
                     fflush(stdin);
-                search_author(START);
+                    search_author(START);
 
             }
             ///YEAT

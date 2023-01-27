@@ -57,8 +57,8 @@ void print_list(LIBRARY *f){ ///DONE
     LIBRARY *p;
     p=f;
    while(p!=NULL){
-        printf("nr: %d\n, autor: %s\n, tytul: %s\n, kategoria: %s\n, wydawnictwo: %s\n, data: %d\n, dostepnosc: %d\n, adres_next: %p\n\n",
-               p->catalog_nb, p->author, p->title, p->category, p->publ_house, p->date, p->is_available, p->next);
+        printf("nr: %d,\n autor: %s,\n tytul: %s,\n kategoria: %s,\n wydawnictwo: %s,\n data: %d,\n dostepnosc: %d;\n\n",
+               p->catalog_nb, p->author, p->title, p->category, p->publ_house, p->date, p->is_available);
         p=p->next;
     }
     return 0;
@@ -66,8 +66,8 @@ void print_list(LIBRARY *f){ ///DONE
 
 void print_element(LIBRARY *START){ ///DONE
     LIBRARY *p = START;
-    printf("nr: %d\n, autor: %s\n, tytul: %s\n, kategoria: %s\n, wydawnictwo: %s\n, data: %d\n, dostepnosc: %d\n, adres_next: %p\n\n",
-               p->catalog_nb, p->author, p->title, p->category, p->publ_house, p->date, p->is_available, p->next);
+    printf("nr: %d,\n autor: %s,\n tytul: %s,\n kategoria: %s,\n wydawnictwo: %s,\n data: %d,\n dostepnosc: %d;\n\n\n",
+               p->catalog_nb, p->author, p->title, p->category, p->publ_house, p->date, p->is_available);
 
 }
 
@@ -192,4 +192,152 @@ void clearr(LIBRARY **START){
         *START = (*START)->next;
         free(tmp);
     }
+}
+
+void edit_element(LIBRARY **START){
+    edit_sign();
+
+
+
+    int user_input5;
+    while(true){
+            ///EDIT MENU
+
+
+                int user_input6;
+                printf("     Podaj numer katalogowy elementu ktory chcesz edytowac: ");
+                scanf("%d",&user_input6);
+
+                while(!is_available_catalog_nb(*START,user_input6)){
+                    printf("     Podaj poprawny numer katalogowy elementu ktory chcesz edytowac: ");
+                    scanf("%d",&user_input6);
+                }
+                LIBRARY *copy = *START;
+                while(copy){
+                    if(copy->catalog_nb == user_input6){
+                          break;
+                    }else{
+                        copy = copy->next;
+                    }
+                }
+                int catalog_nb, date, is_available;
+                char author[size], title[size], category[size], publ_house[size];
+
+                printf("     Wybierz ponizsze opcje wpisujac numer opcji(1/2/3/4/5/6/7/0)! \n\n");
+                printf("     Opcja ""1"": Numer katalogowy.\n");
+                printf("     Opcja ""2"": Autor.\n");
+                printf("     Opcja ""3"": Tytul.\n");
+                printf("     Opcja ""4"": Kategoria. \n");
+                printf("     Opcja ""5"": Data.\n");
+                printf("     Opcja ""6"": Wydawnictwo.\n");
+                printf("     Opcja ""7"": Dostepnosc.\n");
+                printf("     Opcja ""0"": Tytul.\n\n");
+                printf("     Twoja wybrana opcja: ");
+
+
+                ///USER CHOICE
+                printf("     Podaj ktory z elementow chcesz edytowac ");
+                scanf("%d",&user_input5);
+                while(user_input5 != 1 && user_input5 != 2 && user_input5 != 3 && user_input5 != 4 && user_input5 != 5 && user_input5 != 6 && user_input5 != 7 && user_input5 != 0 ){
+                    printf("Podaj poprawna wartosc (1/2/3/4/5/6/7/0): ");
+                    scanf("%d",&user_input5);
+                }
+
+                ///CATALOG NB
+                if(user_input5 == 1){
+                    system("cls");
+                    printf("Podaj nowy nr katalogowy: ");
+                    scanf("%d",&catalog_nb);
+                    while(catalog_nb < 1 || is_available_catalog_nb(START,catalog_nb)){
+                        system("cls");
+                        printf("\nPodaj poprawny nr katalogowy: ");
+                        scanf("%d",&catalog_nb);
+                    }
+                    copy->catalog_nb = catalog_nb;
+                }
+
+                ///AUTHOR
+                else if(user_input5 == 2){
+                    system("cls");
+                    printf("Podaj nowego autora: ");
+                    fgets(author,size,stdin);
+                    author[strlen(author)-1] = '\0';
+                    change_to_floor(author);
+                    strcpy(copy->author,author);
+                }
+
+
+                ///TITLE
+                else if(user_input5 == 3){
+                        system("cls");
+                    printf("Podaj tytul: ");
+                    fgets(title,size,stdin);
+                    title[strlen(title)-1] = '\0';
+                    change_to_floor(title);
+                    //printf("%s",title);
+                    strcpy(copy->title,title);
+                    fflush(stdin);
+                     getch();
+                }
+                 ///CATEGORY
+                else if(user_input5 == 4){
+                        system("cls");
+                    printf("Podaj kategorie: ");
+                    fgets(category,255,stdin);
+                    category[strlen(category)-1] = '\0';
+                    change_to_floor(category);
+                    //printf("%s",category);
+                    strcpy(copy->category,category);
+                    getch();
+
+                }
+                ///DATE
+
+                 else if(user_input5 == 5){
+                        system("cls");
+                        printf("Podaj nowa date: ");
+                        scanf("%d",&date);
+                        while(date > 2023 || date < 1300){
+                        printf("Podaj poprawny rok!\n");
+                        scanf("%d",&date);
+                        }
+                        copy->date = date;
+                        getch();
+                }
+
+                ///PUBLISHING HOUSE
+
+                 else if(user_input5 == 6){
+                        system("cls");
+                        fflush(stdin);
+                        printf("Podaj wydawnictwo: ");
+                        fgets(publ_house,255,stdin);
+                        publ_house[strlen(publ_house)-1] = '\0';
+                        change_to_floor(publ_house);
+                            //printf("%s",publ_house);
+                        strcpy(copy->publ_house,publ_house);
+                        fflush(stdin);
+                        getch();
+
+                }
+
+                ///AVAIABLE STATUS
+
+                 else if(user_input5 == 7){
+                        system("cls");
+                        printf("Podaj dostepnosc [1/0]: ");
+                        scanf("%d",&is_available);
+                        while(is_available != 1 && is_available != 0){
+                            printf("Podaj poprawny status dostepnosci! 1 - dostepny 0 - niedostepny! \n");
+                            scanf("%d",&is_available);
+                        }
+                        getch();
+                }
+                ///GO BACK
+                else if(user_input5 == 0){
+                        system("cls");
+                    return 0;
+                }
+
+}
 }
