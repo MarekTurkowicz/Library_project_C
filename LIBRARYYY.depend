@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1674782829 source:g:\codeblocks\files\libraryyy\main.c
+	"list.h"
+	"menu.h"
+	"sign.h"
+
+1674778162 g:\codeblocks\files\libraryyy\list.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<ctype.h>
+	<windows.h>
+
+1674782499 source:g:\codeblocks\files\libraryyy\list.c
+	"list.h"
+	"sign.h"
+	"menu.h"
+
+1674760675 g:\codeblocks\files\libraryyy\sign.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<ctype.h>
+	<windows.h>
+
+1674780063 g:\codeblocks\files\libraryyy\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<ctype.h>
+	<windows.h>
+
+1674768282 source:g:\codeblocks\files\libraryyy\sign.c
+	"list.h"
+	"sign.h"
+	"menu.h"
+
+1674782652 source:g:\codeblocks\files\libraryyy\menu.c
+	"list.h"
+	"sign.h"
+	"menu.h"
+

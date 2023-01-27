@@ -1,0 +1,195 @@
+#include "list.h"
+#include "sign.h"
+#include "menu.h"
+
+
+void add_element(LIBRARY **first_el,int cat,char aut[size],char tit[size], char cate[size], char publ_h[size], int date, int is_av){
+
+    LIBRARY *new_element = malloc(sizeof(LIBRARY));
+    LIBRARY *pomocnicza;
+
+    new_element->catalog_nb = cat;
+    strcpy(new_element->author,aut);
+    strcpy(new_element->title,tit);
+    strcpy(new_element->category,cate);
+    new_element->date = date;
+    strcpy(new_element->publ_house,publ_h);
+    new_element->is_available = is_av;
+    new_element->next = NULL;
+
+    if(*first_el == NULL){
+       *first_el = new_element;
+    }
+    else
+    {
+        pomocnicza = *first_el;
+        while(pomocnicza->next!=NULL){
+            pomocnicza=pomocnicza->next;
+        }
+        pomocnicza->next = new_element;
+    }
+    return 0;
+}
+
+void save_in(LIBRARY **START){// QUESTIONABLE
+
+}
+
+void change_to_floor(char* character){ ///DONE
+    int size_char = strlen(character);
+    for(int i=0; i<size_char; i++){
+        if((character[i]) == ' '){
+            (character[i]) = '_';
+        }
+    }
+}
+
+void change_to_space(char* character){ ///DONE
+    int size_char = strlen(character);
+    for(int i=0; i<size_char; i++){
+        if((character[i]) == '_'){
+            (character[i]) = ' ';
+        }
+    }
+}
+
+void print_list(LIBRARY *f){ ///DONE
+    LIBRARY *p;
+    p=f;
+   while(p!=NULL){
+        printf("nr: %d\n, autor: %s\n, tytul: %s\n, kategoria: %s\n, wydawnictwo: %s\n, data: %d\n, dostepnosc: %d\n, adres_next: %p\n\n",
+               p->catalog_nb, p->author, p->title, p->category, p->publ_house, p->date, p->is_available, p->next);
+        p=p->next;
+    }
+    return 0;
+}
+
+void print_element(LIBRARY *START){ ///DONE
+    LIBRARY *p = START;
+    printf("nr: %d\n, autor: %s\n, tytul: %s\n, kategoria: %s\n, wydawnictwo: %s\n, data: %d\n, dostepnosc: %d\n, adres_next: %p\n\n",
+               p->catalog_nb, p->author, p->title, p->category, p->publ_house, p->date, p->is_available, p->next);
+
+}
+
+void read_file(LIBRARY *START, char *file_name){ ///DONE
+    //printf("%s",file_name);
+    bool red = false;
+    int cat, date, is_av;
+    char aut[size], tit[size], cate[size], publ_h[size];
+
+    FILE *file_o = fopen(file_name, "r");
+    if(file_o == NULL){
+        printf("Brak odczytu pliku! \n");
+        return 1;
+    }
+    while(red != true){
+        if(fscanf(file_o,"%d %s %s %s %s %d %d\n",&cat, aut, tit, cate, publ_h, &date, &is_av)==7){
+          add_element(START, cat, aut, tit, cate, publ_h, date, is_av);
+        }
+        else{
+            red = true;
+        }
+    }
+    fclose(file_o);
+    return 0;
+}
+
+void write_file(LIBRARY *START, char *file_name){ ///DONE Jan KOwalski
+    FILE *file_o = fopen(file_name, "w");
+    if(file_o == NULL){
+        printf("Brak odczytu pliku! \n");
+        return;
+    }
+
+    LIBRARY *current = START;
+    while(current != NULL) {
+        fprintf(file_o,"%d %s %s %s %s %d %d\n", current->catalog_nb, current->author, current->title, current->category, current->publ_house, current->date, current->is_available);
+        current = current->next;
+    }
+
+    fclose(file_o);
+}
+
+bool available_status(LIBRARY *START){ ///DONE
+    if(START->is_available){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool is_empty(LIBRARY *START){///DONE
+    if(START){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+bool is_alone(LIBRARY *START){///DONE
+    if(START->next){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+int amount_of_elements(LIBRARY *START){ ///DONE
+    int amount;
+    LIBRARY *TMP = START;
+    while(TMP){
+        if(TMP->next){
+            amount++;
+        }
+        TMP = TMP->next;
+    }
+    return amount;
+}
+
+bool is_available_catalog_nb(LIBRARY *START,int nb){ ///DONE
+    while(START){
+        if(START->catalog_nb == nb){
+            return true;
+        }
+        else{
+            START = START->next;
+        }
+    }
+    return false;
+}
+
+void insertion_sort(LIBRARY *START){ ///NOT NECESSARY BETA FOR TITLE
+    LIBRARY *sorted = NULL;
+    LIBRARY *current = START;
+    LIBRARY *next;
+    while (current != NULL) {
+        next = current->next;
+        LIBRARY *prev = NULL;
+        LIBRARY *temp = sorted;
+        while (temp && strcmp(temp->title, current->title) < 0) {
+            prev = temp;
+            temp = temp->next;
+        }
+        if (prev == NULL) {
+            current->next = sorted;
+            sorted = current;
+        } else {
+            prev->next = current;
+            current->next = temp;
+        }
+        current = next;
+    }
+    print_list(sorted);
+}
+
+void clearr(LIBRARY **START){
+    LIBRARY *tmp = *START;
+    while(*START){
+        tmp = (*START);
+        *START = (*START)->next;
+        free(tmp);
+    }
+}

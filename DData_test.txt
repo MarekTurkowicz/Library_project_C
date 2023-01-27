@@ -1,0 +1,7 @@
+4 title_book_D AutorD proggramingD publ_houseD 2025 0
+3 title_book_E AutorE proggramingE publ_houseE 2020 1
+1 title_book_A AutorA proggramingA publ_houseA 2016 1
+2 title_book_B AutorB proggramingB publ_houseB 2018 0
+3 title_book_C AutorC proggramingC publ_houseC 2020 1
+3 title_book_F AutorF proggramingF publ_houseF 2020 1
+99 Adam_Mickiewicz Pan_Tadeusz powiesc Eryk_WIelki 1901 1

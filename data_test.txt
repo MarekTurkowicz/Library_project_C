@@ -1,0 +1,6 @@
+04 title_book_D AutorD proggramingD publ_houseD 2025 0
+03 title_book_E AutorE proggramingE publ_houseE 2020 1
+01 title_book_A AutorA proggramingA publ_houseA 2016 1
+02 title_book_B AutorB proggramingB publ_houseB 2018 0
+03 title_book_C AutorC proggramingC publ_houseC 2020 1
+03 title_book_F AutorF proggramingF publ_houseF 2020 1
