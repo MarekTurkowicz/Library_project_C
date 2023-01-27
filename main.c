@@ -5,7 +5,7 @@
 
 
 int main(){
-            ///DEFAULT
+            ///DEFAULT ZMIANA
     LIBRARY *START = NULL;
     read_file(&START,"data_test.txt");
     //view_year_increase(START);
