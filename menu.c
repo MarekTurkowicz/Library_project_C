@@ -189,7 +189,8 @@ void search_year(LIBRARY *START){ ///DONE
 }
 
 void search_title(LIBRARY *START){///DONE
-
+    bool x = false;
+    //fflush(stdin);
     char title[size];
     printf("Podaj tytul lub fragment tytulu ksiazki: ");
     fgets(title,size,stdin);
@@ -208,11 +209,14 @@ void search_title(LIBRARY *START){///DONE
         }
         TMP=TMP->next;
     }
-
+    if(!x){
+        printf("BRAK ZNALEZIONYCH ELEMENTOW");
+    }
 }
 
 void search_author(LIBRARY *START){///DONE
 
+    //fflush(stdin);
     char author[size];
     printf("Podaj autora: ");
     fgets(author,size,stdin);
@@ -221,6 +225,7 @@ void search_author(LIBRARY *START){///DONE
 
     int size_of_author = strlen(author);
     LIBRARY *TMP = START;
+    bool x = false;
     while(TMP){
         char copy[size];
         strncpy(copy, TMP->author,size_of_author);
@@ -228,9 +233,14 @@ void search_author(LIBRARY *START){///DONE
         strlwr(author);
         if(strcmpi(copy,author) == 0){
             print_element(TMP);
+            x = true;
         }
         TMP=TMP->next;
     }
+    if(!x){
+        printf("BRAK ZNALEZIONYCH ELEMENTOW");
+    }
+
 }
 
 void search_available(LIBRARY *START){//TODO??
@@ -245,11 +255,11 @@ void search_available(LIBRARY *START){//TODO??
     while(TMP){
         char copy[size];
         strncpy(copy, TMP->title,size_of_title);
-        printf(" kopia tytulu zwezona i przed :  %s \n",copy);
+        //printf(" kopia tytulu zwezona i przed :  %s \n",copy);
         strlwr(copy);
-        printf(" kopia tytulu:  %s \n",copy); //dziala
+        //printf(" kopia tytulu:  %s \n",copy); //dziala
         strlwr(title);
-        printf(" tytul urzytkownika: %s\n\n\n",title);
+        //printf(" tytul urzytkownika: %s\n\n\n",title);
         if(strcmpi(copy,title) == 0 && available_status(TMP)){
             print_element(TMP);
         }
@@ -353,6 +363,7 @@ void view_menu_print(LIBRARY *START){ ///DONE
             }
     }
 }
+
 void search_menu_print(LIBRARY *START){
 
     int user_input3;
@@ -376,8 +387,9 @@ void search_menu_print(LIBRARY *START){
             ///AUTHOR
             else if(user_input3 == 2){
                     system("cls");
+                    fflush(stdin);
                 search_author(START);
-                getch();
+
             }
             ///YEAT
             else if(user_input3 == 3){
@@ -399,6 +411,7 @@ void search_menu_print(LIBRARY *START){
             }
     }
 }
+
 void edit_menu_print(LIBRARY *START){
      int user_input4;
     while(true){
@@ -438,7 +451,6 @@ void edit_menu_print(LIBRARY *START){
                 return 0;
             }
     }
-
 }
 
 

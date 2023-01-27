@@ -10,7 +10,7 @@ int main(){
     read_file(&START,"data_test.txt");
     //view_year_increase(START);
     //view_author_alfp(START);
-
+    //search_author(START);
             ///MENU
 int user_input;
     while(true){
@@ -59,9 +59,11 @@ int user_input;
                     sleep(1);
                     system("cls");
                     ///CLEARING MY LIST
-                    clearr(&START);
                 return 0;
             }
-    }
+
+
+}
+    clearr(&START);
     return 0;
 }

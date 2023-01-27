@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1674782829 source:g:\codeblocks\files\libraryyy\main.c
+1674785092 source:g:\codeblocks\files\libraryyy\main.c
 	"list.h"
 	"menu.h"
 	"sign.h"
@@ -38,7 +38,7 @@
 	"sign.h"
 	"menu.h"
 
-1674782652 source:g:\codeblocks\files\libraryyy\menu.c
+1674786138 source:g:\codeblocks\files\libraryyy\menu.c
 	"list.h"
 	"sign.h"
 	"menu.h"
